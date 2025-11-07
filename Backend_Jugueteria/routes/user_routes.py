@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 import jwt
 import os
-from database.conexion import get_db
+from Database.conexion import get_db
 
 usuarios_bp = Blueprint('usuarios', __name__)
 
