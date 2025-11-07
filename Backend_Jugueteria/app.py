@@ -10,10 +10,10 @@ app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'clave_secreta')
 
 CORS(app)
 
-# Importar rutas
-from routes.auth import auth_bp
-from routes.productos import productos_bp
-from routes.usuarios import usuarios_bp
+# Importar rutas - CON LOS NOMBRES CORRECTOS
+from routes.auth_routes import auth_bp
+from routes.producto_routes import productos_bp
+from routes.user_routes import usuarios_bp
 
 # Registrar rutas
 app.register_blueprint(auth_bp, url_prefix='/api/auth')
