@@ -52,6 +52,7 @@ INSERT INTO Compra (Id_Cliente, Id_Producto) VALUES
 
 -- =============================================
 -- VERIFICAR DATOS 
+
 -- =============================================
 
 SELECT 'PRODUCTOS' as Tabla;
