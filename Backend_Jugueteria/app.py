@@ -53,7 +53,7 @@ def home():
     return jsonify({
         'success': True,
         'message': '🚀 Backend Jugueteria funcionando!',
-        'database': 'Jugueteria',
+        'database': 'Juguetes',
         'endpoints': {
             'auth': '/api/auth/*',
             'productos': '/api/productos/*',
