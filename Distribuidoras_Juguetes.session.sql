@@ -1,5 +1,5 @@
 -- =============================================
--- AGREGAR MÁS DATOS PARA MÓDULO DE VENTAS
+-- AGREGAR VENTAS CORREGIDO
 -- =============================================
 
 INSERT INTO Producto (Nombre, Descripcion, Fecha_Vencimiento, Cantidad, Valor_Unitario, Id_Linea) VALUES
@@ -17,10 +17,10 @@ INSERT INTO Cliente (Nombre, Fecha_Nacimiento, Historial_Compras) VALUES
 
 INSERT INTO Venta (Descripcion, Valor_Total) VALUES
 ('Venta juguetes educativos premium', 385000),
-('Venta electrónicos temporada navideña', 620000),
-('Venta muñecas y accesorios boutique', 275000),
+('Venta electronicos temporada navidena', 620800),
+('Venta munecas y accesorios boutique', 275000),
 ('Venta juegos de mesa familiares', 195000),
-('Venta vehículos coleccionables', 340000),
+('Venta vehiculos coleccionables', 340000),
 ('Venta promocional fin de mes', 280000),
 ('Venta cliente frecuente descuento', 450000),
 ('Venta mayorista productos varios', 890000);
@@ -36,48 +36,26 @@ INSERT INTO Detalle_Venta (Id_Venta, Id_Producto, Cantidad_Producto) VALUES
 (9, 9, 1),  -- Venta 9: 1 Monopoly
 (10, 5, 3), -- Venta 10: 3 Carro Bomberos
 (10, 10, 2), -- Venta 10: 2 Pista Carreras
-(11, 6, 1), -- Venta 11: 1 Puzzle
-(11, 7, 1), -- Venta 11: 1 Tablet
-(12, 8, 2), -- Venta 12: 2 Action Man
-(12, 9, 1), -- Venta 12: 1 Monopoly
-(13, 1, 4), -- Venta 13: 4 Lego
-(13, 2, 1); -- Venta 13: 1 Robot
+(11, 6, 1); -- Venta 11: 1 Puzzle
 
+SELECT 'VENTAS INSERTADAS' as Verificacion;
+SELECT * FROM Venta WHERE Id_Venta >= 6;
 
-INSERT INTO Compra (Id_Cliente, Id_Producto) VALUES
-(6, 1), (6, 6),
-(7, 2), (7, 7),
-(8, 3), (8, 8),
-(9, 4), (9, 9);
-
--- =============================================
--- VERIFICAR DATOS 
-
--- =============================================
-
-SELECT 'PRODUCTOS' as Tabla;
-SELECT Id_Producto, Nombre, Cantidad, Valor_Unitario FROM Producto;
-
-SELECT 'CLIENTES' as Tabla;  
-SELECT Id_Cliente, Nombre FROM Cliente;
-
-SELECT 'VENTAS' as Tabla;
-SELECT Id_Venta, Descripcion, Valor_Total FROM Venta;
-
-SELECT 'DETALLES VENTA' as Tabla;
-SELECT dv.Id_Venta, p.Nombre as Producto, dv.Cantidad_Producto, p.Valor_Unitario
+SELECT 'DETALLES INSERTADOS' as Verificacion;
+SELECT dv.Id_Venta, v.Descripcion, p.Nombre as Producto, dv.Cantidad_Producto
 FROM Detalle_Venta dv
+JOIN Venta v ON dv.Id_Venta = v.Id_Venta
 JOIN Producto p ON dv.Id_Producto = p.Id_Producto
-ORDER BY dv.Id_Venta;
+WHERE dv.Id_Venta >= 6;
 
-SELECT 'ESTADÍSTICAS VENTAS' as Reporte;
+SELECT 'ESTADISTICAS VENTAS' as Reporte;
 SELECT 
     COUNT(*) as Total_Ventas,
     SUM(Valor_Total) as Valor_Total_Ventas,
     AVG(Valor_Total) as Promedio_Venta
 FROM Venta;
 
-SELECT 'PRODUCTOS MÁS VENDIDOS' as Ranking;
+SELECT 'PRODUCTOS MAS VENDIDOS' as Ranking;
 SELECT 
     p.Nombre as Producto,
     SUM(dv.Cantidad_Producto) as Total_Vendido,
