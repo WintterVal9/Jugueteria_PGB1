@@ -11,15 +11,15 @@ def get_db():
             host=os.getenv('DB_HOST', '127.0.0.1'),
             user=os.getenv('DB_USER', 'root'),
             password=os.getenv('DB_PASSWORD', 'Uni*Bosque29'),
-            database=os.getenv('DB_NAME', 'Jugueteria'),
+            database=os.getenv('DB_NAME', 'Juguetes'),
             port=int(os.getenv('DB_PORT', 3306)),
             charset='utf8mb4',
             cursorclass=pymysql.cursors.DictCursor
         )
-        print("✅ Conexión a MySQL establecida")
+        print("✓ Conexión a MySQL establecida")
         return conn
     except Exception as e:
-        print(f"❌ Error de conexión a MySQL: {e}")
+        print(f" Error de conexión a MySQL: {e}")
         return None
 
 def init_db():
@@ -53,18 +53,19 @@ def init_db():
                         (username, email, password, nombre, apellido, rol) VALUES
                         ('admin', 'admin@jugueteria.com', '$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj89tiM7Q.Ly', 'Admin', 'Sistema', 'admin')
                     ''')
-                    print("✅ Tabla 'usuarios' creada")
+                print("✓ Conexión a MySQL establecida. Tabla 'usuarios' creada.")
+
                 
                 # Mostrar tablas existentes
                 cursor.execute("SHOW TABLES")
                 tablas = cursor.fetchall()
-                print(f"📊 Tablas en la base de datos: {len(tablas)}")
+                print(f"✉︎ Tablas en la base de datos: {len(tablas)}")
                 
             db.commit()
             db.close()
             return True
     except Exception as e:
-        print(f"❌ Error al inicializar BD: {e}")
+        print(f" Error al inicializar BD: {e}")
         return False
 
 # Inicializar base de datos al importar
