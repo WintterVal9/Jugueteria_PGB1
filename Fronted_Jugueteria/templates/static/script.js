@@ -1,53 +1,43 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const estadoConexion = document.getElementById("estadoConexion");
-  const listaProductos = document.getElementById("listaProductos");
   const verificarBtn = document.getElementById("verificarBtn");
+  const estadoConexion = document.getElementById("estadoConexion");
   const cargarBtn = document.getElementById("cargarBtn");
+  const listaProductos = document.getElementById("listaProductos");
 
-  // Verificar conexión
+  // 🧩 Verificar conexión con el backend
   verificarBtn.addEventListener("click", async () => {
-    estadoConexion.textContent = "Verificando...";
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/verificar-conexion/");
-      const data = await res.json();
-      if (data.status === "ok") {
-        estadoConexion.textContent = `✅ Conectado a la base de datos: ${data.database}`;
-        estadoConexion.style.color = "green";
-      } else {
-        estadoConexion.textContent = "❌ Error en la conexión.";
-        estadoConexion.style.color = "red";
-      }
+      const response = await fetch("http://127.0.0.1:8000/verificar-conexion/");
+      if (!response.ok) throw new Error("No se pudo conectar con el servidor");
+      const data = await response.json();
+      estadoConexion.textContent = `✅ Conectado: ${data.mensaje}`;
     } catch (error) {
+      console.error(error);
       estadoConexion.textContent = "⚠️ No se pudo conectar con el servidor.";
-      estadoConexion.style.color = "red";
     }
   });
 
-  // Cargar productos
+  // 🧸 Cargar lista de productos
   cargarBtn.addEventListener("click", async () => {
-    listaProductos.innerHTML = "Cargando productos...";
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/productos/");
-      const data = await res.json();
+      const response = await fetch("http://127.0.0.1:8000/productos/");
+      if (!response.ok) throw new Error("Error al cargar productos");
+      const productos = await response.json();
 
-      if (data.productos && data.productos.length > 0) {
-        listaProductos.innerHTML = "";
-        data.productos.forEach(p => {
-          const card = document.createElement("div");
-          card.className = "producto";
-          card.innerHTML = `
-            <h3>${p.nombre}</h3>
-            <p><b>Código:</b> ${p.codigo}</p>
-            <p><b>Precio:</b> $${p.precio}</p>
-            <p><b>Stock:</b> ${p.stock}</p>
-          `;
-          listaProductos.appendChild(card);
-        });
-      } else {
-        listaProductos.innerHTML = "<p>No hay productos registrados.</p>";
-      }
+      listaProductos.innerHTML = "";
+      productos.forEach(p => {
+        const item = document.createElement("div");
+        item.classList.add("producto");
+        item.innerHTML = `
+          <h3>${p.nombre}</h3>
+          <p>Precio: $${p.precio}</p>
+          <p>Categoría: ${p.categoria}</p>
+        `;
+        listaProductos.appendChild(item);
+      });
     } catch (error) {
-      listaProductos.innerHTML = "<p style='color:red;'>Error al cargar productos.</p>";
+      console.error(error);
+      listaProductos.innerHTML = "Error al cargar productos.";
     }
   });
 });
