@@ -9,11 +9,11 @@ def verificar_conexion(request):
         with connection.cursor() as cursor:
             cursor.execute("SELECT DATABASE();")
             db_name = cursor.fetchone()[0]
-        logger.info(f"✅ Conectado a la base de datos: {db_name}")
+        logger.info(f"Conectado a la base de datos: {db_name}")
         return JsonResponse({"status": "ok", "database": db_name})
     except OperationalError as e:
-        logger.error(f"❌ Error de conexión: {e}")
+        logger.error(f"Error de conexión: {e}")
         return JsonResponse({"status": "error", "message": str(e)}, status=500)
     except Exception as e:
-        logger.exception("❌ Error inesperado")
+        logger.exception("Error inesperado")
         return JsonResponse({"status": "error", "message": str(e)}, status=500)
