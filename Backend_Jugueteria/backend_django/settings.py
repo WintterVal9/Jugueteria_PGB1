@@ -33,7 +33,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'backend_jugueteria.urls'
+ROOT_URLCONF = 'backend_django.urls'
 
 TEMPLATES = [
     {
@@ -51,7 +51,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'backend_jugueteria.wsgi.application'
+WSGI_APPLICATION = 'backend_django.wsgi.application'
 
 # Configuración de base de datos MySQL
 DATABASES = {
