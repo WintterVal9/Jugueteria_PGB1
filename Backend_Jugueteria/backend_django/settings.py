@@ -2,15 +2,14 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-# Cargar variables del archivo .env
+# Cargar variables desde .env
 load_dotenv()
 
-# BASE_DIR = carpeta raíz del proyecto
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Seguridad
-SECRET_KEY = os.getenv('SECRET_KEY', 'clave-insegura-por-defecto')
-DEBUG = os.getenv('DEBUG', 'True') == 'True'
+# Seguridad y configuración general
+SECRET_KEY = os.getenv('SECRET_KEY', 'django_insecure_default')
+DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
 ALLOWED_HOSTS = ['*']
 
 # Aplicaciones instaladas
@@ -21,12 +20,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    # Tu app personalizada
-    'juguetes',   # <- la app que vas a crear
 ]
 
-# Middleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -37,12 +32,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'backend_django.urls'
+ROOT_URLCONF = 'backend_jugueteria.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'Fronted_Jugueteria'],  # Tu carpeta de HTML y estáticos
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -55,24 +50,31 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'backend_django.wsgi.application'
+WSGI_APPLICATION = 'backend_jugueteria.wsgi.application'
 
-# Base de datos (puedes cambiar a MySQL si deseas)
+# Configuración de base de datos MySQL
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.getenv('DB_NAME', 'Juguetes'),
+        'USER': os.getenv('DB_USER', 'root'),
+        'PASSWORD': os.getenv('DB_PASSWORD', 'Uni*Bosque29'),
+        'HOST': os.getenv('DB_HOST', '127.0.0.1'),
+        'PORT': os.getenv('DB_PORT', '3306'),
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
     }
 }
 
-# Archivos estáticos
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'Fronted_Jugueteria' / 'static']
-
-# Zona horaria y lenguaje
-LANGUAGE_CODE = 'es'
+# Configuración de idioma y zona horaria
+LANGUAGE_CODE = 'es-co'
 TIME_ZONE = 'America/Bogota'
 USE_I18N = True
 USE_TZ = True
+
+# Archivos estáticos
+STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
