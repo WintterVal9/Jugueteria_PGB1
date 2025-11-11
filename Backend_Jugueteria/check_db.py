@@ -4,7 +4,7 @@ import django
 from django.db import connections
 from django.db.utils import OperationalError
 
-# Configurar el entorno de Django
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend_django.settings')
 django.setup()
 
