@@ -1,47 +1,53 @@
-const API_URL = "http://127.0.0.1:8000/api";
+document.addEventListener("DOMContentLoaded", () => {
+  const estadoConexion = document.getElementById("estadoConexion");
+  const listaProductos = document.getElementById("listaProductos");
+  const verificarBtn = document.getElementById("verificarBtn");
+  const cargarBtn = document.getElementById("cargarBtn");
 
-document.getElementById("verificarBtn").addEventListener("click", async () => {
-  const estado = document.getElementById("estadoConexion");
-  estado.textContent = "Verificando...";
-  try {
-    const res = await fetch(`${API_URL}/verificar-conexion/`);
-    const data = await res.json();
-    if (data.status === "ok") {
-      estado.textContent = `✅ Conectado a la base de datos: ${data.database}`;
-      estado.style.color = "green";
-    } else {
-      estado.textContent = "❌ Error al conectar.";
-      estado.style.color = "red";
+  // Verificar conexión
+  verificarBtn.addEventListener("click", async () => {
+    estadoConexion.textContent = "Verificando...";
+    try {
+      const res = await fetch("http://127.0.0.1:8000/api/verificar-conexion/");
+      const data = await res.json();
+      if (data.status === "ok") {
+        estadoConexion.textContent = `✅ Conectado a la base de datos: ${data.database}`;
+        estadoConexion.style.color = "green";
+      } else {
+        estadoConexion.textContent = "❌ Error en la conexión.";
+        estadoConexion.style.color = "red";
+      }
+    } catch (error) {
+      estadoConexion.textContent = "⚠️ No se pudo conectar con el servidor.";
+      estadoConexion.style.color = "red";
     }
-  } catch (err) {
-    estado.textContent = "⚠️ No se pudo contactar al servidor.";
-    estado.style.color = "red";
-  }
-});
+  });
 
-document.getElementById("cargarBtn").addEventListener("click", async () => {
-  const contenedor = document.getElementById("listaProductos");
-  contenedor.innerHTML = "<p>Cargando productos...</p>";
+  // Cargar productos
+  cargarBtn.addEventListener("click", async () => {
+    listaProductos.innerHTML = "Cargando productos...";
+    try {
+      const res = await fetch("http://127.0.0.1:8000/api/productos/");
+      const data = await res.json();
 
-  try {
-    const res = await fetch(`${API_URL}/productos/`);
-    const data = await res.json();
-    if (data.count > 0) {
-      contenedor.innerHTML = "";
-      data.productos.forEach(p => {
-        contenedor.innerHTML += `
-          <div class="producto">
+      if (data.productos && data.productos.length > 0) {
+        listaProductos.innerHTML = "";
+        data.productos.forEach(p => {
+          const card = document.createElement("div");
+          card.className = "producto";
+          card.innerHTML = `
             <h3>${p.nombre}</h3>
             <p><b>Código:</b> ${p.codigo}</p>
             <p><b>Precio:</b> $${p.precio}</p>
             <p><b>Stock:</b> ${p.stock}</p>
-          </div>
-        `;
-      });
-    } else {
-      contenedor.innerHTML = "<p>No hay productos disponibles.</p>";
+          `;
+          listaProductos.appendChild(card);
+        });
+      } else {
+        listaProductos.innerHTML = "<p>No hay productos registrados.</p>";
+      }
+    } catch (error) {
+      listaProductos.innerHTML = "<p style='color:red;'>Error al cargar productos.</p>";
     }
-  } catch (err) {
-    contenedor.innerHTML = "<p style='color:red;'>Error al cargar productos.</p>";
-  }
+  });
 });

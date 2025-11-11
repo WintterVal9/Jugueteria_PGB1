@@ -2,34 +2,42 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Juguetería 🎠</title>
-  <link rel="stylesheet" href="styles.css">
+  
+  <!-- Enlazamos correctamente los estilos -->
+  <link rel="stylesheet" href="static/style.css" />
+
+  <!-- Script principal -->
+  <script src="static/script.js" defer></script>
 </head>
+
 <body>
   <header>
-    <h1>Bienvenido a Jugueteria TeddyBear </h1>
-    <p>Panel de conexión y productos</p>
+    <h1>🎠 Juguetería TeddyBear</h1>
+    <p>Panel de conexión y gestión de productos</p>
   </header>
 
   <main>
+    <!-- Sección de conexión -->
     <section id="conexion">
-      <h2>Estado de conexión con el servidor</h2>
+      <h2>🔗 Estado de conexión con el servidor</h2>
       <button id="verificarBtn">Verificar conexión</button>
-      <p id="estadoConexion">Esperando verificación...</p>
+      <p id="estadoConexion" class="mensaje">Esperando verificación...</p>
     </section>
 
+    <hr>
+
+    <!-- Sección de productos -->
     <section id="productos">
-      <h2>Lista de productos</h2>
+      <h2>🧸 Lista de productos</h2>
       <button id="cargarBtn">Cargar productos</button>
-      <div id="listaProductos"></div>
+      <div id="listaProductos" class="grid-productos"></div>
     </section>
   </main>
 
   <footer>
-    <p>© 2025 Juguetería PGB1 - Desarrollado por Cami 💫</p>
+    <p>© 2025 Juguetería PGB1 - Desarrollado por Valentina Martinez, Laura Ramirez, David Suarez 💫</p>
   </footer>
-
-  <script src="scripts.js"></script>
 </body>
 </html>
