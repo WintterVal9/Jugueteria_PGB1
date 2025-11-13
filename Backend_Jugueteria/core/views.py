@@ -93,3 +93,8 @@ def productos_crud(request):
         data = json.loads(request.body)
         Producto.objects.filter(id=data['id']).delete()
         return JsonResponse({'status': 'deleted'})
+    # core/views.py
+def api_productos(request):
+    productos = list(Producto.objects.values())
+    return JsonResponse(productos, safe=False)
+
