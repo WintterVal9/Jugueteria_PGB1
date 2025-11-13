@@ -38,7 +38,7 @@ ROOT_URLCONF = 'backend_django.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'core', 'templates')],  # 👈 Plantillas
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -68,6 +68,13 @@ DATABASES = {
     }
 }
 
+# Configuración NoSQL (MongoDB para imágenes)
+MONGO_CONFIG = {
+    'NAME': os.getenv('MONGO_DB_NAME', 'jugueteria_files'),
+    'HOST': os.getenv('MONGO_DB_HOST', 'localhost'),
+    'PORT': int(os.getenv('MONGO_DB_PORT', 27017)),
+}
+
 # Configuración de idioma y zona horaria
 LANGUAGE_CODE = 'es-co'
 TIME_ZONE = 'America/Bogota'
@@ -76,6 +83,8 @@ USE_TZ = True
 
 # Archivos estáticos
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'core', 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+

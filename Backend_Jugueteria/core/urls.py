@@ -1,10 +1,11 @@
 from django.urls import path
-from . import views
+from . import views, views_productos
 
 urlpatterns = [
     path('productos/', views.lista_productos, name='lista_productos'),
     path('verificar-conexion/', views.verificar_conexion, name='verificar_conexion'),
 
-    # 🧾 Nueva ruta para el módulo de ventas
-    path('ventas/registrar/', views.registrar_venta, name='registrar_venta'),
+    # 🔹 Rutas administrativas
+    path('admin/productos/', views_productos.lista_productos_admin, name='admin_productos'),
+    path('admin/productos/nuevo/', views_productos.crear_producto, name='admin_crear_producto'),
 ]
