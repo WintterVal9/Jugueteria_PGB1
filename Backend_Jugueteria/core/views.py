@@ -120,7 +120,7 @@ def crear_producto_front(request):
     return render(request, 'crear_producto.html')
 
 def registrar_ventas_front(request):
-    """Vista para la página de registrar ventas (frontend)"""
+    """Vista para la página de registrar ventas"""
     return render(request, 'registrar_ventas.html')
 
 # 🔹 VISTA PARA EL API PRINCIPAL (si no la tienes):

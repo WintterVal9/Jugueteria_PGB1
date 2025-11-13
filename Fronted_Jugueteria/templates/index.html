@@ -6,14 +6,196 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>🎠 Juguetería TeddyBear</title>
 
-  <link rel="stylesheet" href="{% static 'style.css' %}">
-</head>
-<body>
-    <!-- Tu contenido -->
-    
-    <!-- 🔹 CARGAR JAVASCRIPT CORRECTAMENTE -->
-    <script src="{% static 'js/script.js' %}"></script>
-    <script src="{% static 'js/admin.js' %}"></script>
+  <!-- 🔹 CSS COMPLETO INTEGRADO -->
+  <style>
+    /* 🎠 Estilo general */
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #fff6f9 0%, #ffe3f0 100%);
+      color: #333;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+
+    /* 🎀 Encabezado */
+    header {
+      background: linear-gradient(90deg, #ffb6c1, #ff99aa);
+      color: white;
+      text-align: center;
+      padding: 2rem 0;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      margin: 0;
+      letter-spacing: 1px;
+    }
+
+    header p {
+      margin: 0.5rem 0 0;
+      font-weight: 300;
+      opacity: 0.9;
+    }
+
+    /* 🌸 Contenido principal */
+    main {
+      padding: 2rem;
+      max-width: 1000px;
+      margin: 2rem auto;
+      background: white;
+      border-radius: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    /* ✨ Botones */
+    button {
+      background: #ff6f91;
+      color: white;
+      border: none;
+      padding: 0.7rem 1.5rem;
+      border-radius: 1rem;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: #ff3d68;
+      transform: scale(1.05);
+    }
+
+    /* 🧩 Estado de conexión */
+    #conexion {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .mensaje {
+      margin-top: 1rem;
+      font-weight: 500;
+    }
+
+    /* 🧸 Productos */
+    #productos {
+      text-align: center;
+    }
+
+    .grid-productos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    /* 🎁 Tarjeta individual */
+    .producto {
+      background: #fff0f5;
+      border: 2px solid #ffcce0;
+      border-radius: 1.2rem;
+      padding: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .producto:hover {
+      transform: translateY(-5px);
+      background: #ffe6f0;
+      box-shadow: 0 6px 12px rgba(255, 182, 193, 0.4);
+    }
+
+    .producto h3 {
+      color: #ff4b6e;
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    .producto p {
+      margin: 0.3rem 0;
+      font-size: 0.95rem;
+    }
+
+    /* 💫 Línea divisoria */
+    hr {
+      border: none;
+      border-top: 2px dashed #ffcce0;
+      margin: 2rem 0;
+    }
+
+    /* 🎠 Footer */
+    footer {
+      text-align: center;
+      padding: 1rem 0;
+      background: #ffb6c1;
+      color: white;
+      font-size: 0.9rem;
+      margin-top: 2rem;
+      box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    footer p {
+      margin: 0;
+    }
+
+    section {
+      margin-bottom: 2rem;
+    }
+
+    /* ⚙️ Sección de navegación */
+    #navegacion {
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    #navegacion h2 {
+      color: #ff4b6e;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    /* 💖 Contenedor de botones */
+    .botonera {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    /* 🌟 Estilo base de los botones tipo <a> */
+    .btn {
+      display: inline-block;
+      background: linear-gradient(90deg, #ff6f91, #ff4b6e);
+      color: white;
+      padding: 0.8rem 1.6rem;
+      border-radius: 1rem;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 4px 10px rgba(255, 105, 135, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      background: linear-gradient(90deg, #ff4b6e, #ff1a4d);
+      transform: scale(1.07);
+      box-shadow: 0 6px 12px rgba(255, 105, 135, 0.4);
+    }
+
+    /* 🎯 Estilos adicionales para mejor apariencia */
+    h2 {
+      color: #ff4b6e;
+      margin-bottom: 1rem;
+    }
+
+    .mensaje {
+      padding: 10px;
+      border-radius: 8px;
+      background: #f8f9fa;
+      border-left: 4px solid #ff6f91;
+    }
+  </style>
 </head>
 
 <body>
@@ -45,10 +227,10 @@
     <section id="navegacion">
       <h2>⚙️ Administración y gestión</h2>
       <div class="botonera">
-        <a href="{% url 'admin_productos' %}" class="btn">Administrar productos</a>
-        <a href="{% url 'admin_crear_producto' %}" class="btn">Crear nuevo producto</a>
-        <a href="{% url 'lista_productos' %}" class="btn">Ver productos disponibles</a>
-        <a href="/api/admin/ventas/" class="btn">Registrar ventas</a>
+        <a href="/admin/productos/" class="btn">Administrar productos</a>
+        <a href="/admin/productos/nuevo/" class="btn">Crear nuevo producto</a>
+        <a href="/productos/" class="btn">Ver productos disponibles</a>
+        <a href="/admin/ventas/" class="btn">Registrar ventas</a>
       </div>
     </section>
   </main>
@@ -56,5 +238,8 @@
   <footer>
     <p>© 2025 Juguetería PGB1 - Desarrollado por Valentina Martinez, Laura Ramirez, David Suarez 💫</p>
   </footer>
+
+  <!-- Script principal -->
+  <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>

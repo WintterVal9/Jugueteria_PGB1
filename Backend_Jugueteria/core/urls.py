@@ -9,9 +9,11 @@ urlpatterns = [
     # Administración
     path('admin/productos/', views_productos.lista_productos_admin, name='admin_productos'),
     path('admin/productos/nuevo/', views_productos.crear_producto, name='admin_crear_producto'),
+    path('admin-ventas/', views.registrar_ventas_front, name='ventas_front'),
 
     # API
     path('api/productos/', views.api_productos, name='api_productos'),
+    
 ]
 
 
