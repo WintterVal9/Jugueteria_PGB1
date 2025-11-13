@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Nuevo Producto</title>
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+</head>
+<body>
+    <h1>Registrar nuevo producto</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label>Código:</label>
+        <input type="text" name="codigo" required><br>
+        <label>Nombre:</label>
+        <input type="text" name="nombre" required><br>
+        <label>Precio:</label>
+        <input type="number" step="0.01" name="precio" required><br>
+        <label>Stock:</label>
+        <input type="number" name="stock" required><br>
+        <label>Línea:</label>
+        <input type="text" name="linea"><br>
+        <label>Descripción:</label>
+        <textarea name="descripcion"></textarea><br>
+        <label>Imagen:</label>
+        <input type="file" name="imagen" accept="image/*"><br>
+        <button type="submit" class="btn">Guardar</button>
+        <a href="{% url 'admin_productos' %}" class="btn-cancelar">Cancelar</a>
+    </form>
+</body>
+</html>
