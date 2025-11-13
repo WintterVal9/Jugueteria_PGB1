@@ -11,7 +11,7 @@ def lista_productos_admin(request):
     Muestra todos los productos registrados en el panel de administración.
     """
     productos = Producto.objects.all()
-    return render(request, 'admin/productos_list.html', {'productos': productos})
+    return render(request, 'productos_list.html', {'productos': productos})
 
 
 # 🔹 Vista para crear un nuevo producto desde formulario HTML
@@ -51,5 +51,5 @@ def crear_producto(request):
         return redirect('admin_productos')
 
     # Si es GET, solo renderiza el formulario
-    return render(request, 'admin/crear_producto.html')
+    return render(request, 'crear_producto.html')
 

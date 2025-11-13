@@ -40,7 +40,10 @@ ROOT_URLCONF = 'backend_django.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'core', 'templates')],  # 👈 Plantillas
+        'DIRS': [
+            os.path.join(BASE_DIR, 'core', 'templates'),
+            os.path.join(BASE_DIR, '..', 'Fronted_Jugueteria', 'templates'),  # 🔹 RUTA CORREGIDA
+        ],  
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -52,6 +55,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'backend_django.wsgi.application'
 
@@ -84,8 +88,10 @@ USE_I18N = True
 USE_TZ = True
 
 # Archivos estáticos
-STATIC_URL = 'static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'core', 'static')]
+STATIC_URL = '/static/'  # 🔹 Agrega la diagonal al inicio
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, '..', 'Fronted_Jugueteria', 'static'),  # 🔹 Ruta corregida
+]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
