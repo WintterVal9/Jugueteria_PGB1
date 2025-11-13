@@ -4,47 +4,67 @@
 <head>
     <meta charset="UTF-8">
     <title>Registrar Venta</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
 </head>
 <body>
-    <h1>Registrar Venta</h1>
+    <header>
+        <h1>🧾 Registro de Ventas</h1>
+        <div>
+            <a href="{% url 'index' %}" class="btn">🏠 Inicio</a>
+            <a href="{% url 'admin_productos' %}" class="btn">🧸 Administración</a>
+        </div>
+    </header>
 
-    <form method="POST">
-        {% csrf_token %}
-        <label>Cliente:</label>
-        <input type="text" name="cliente" required><br><br>
+    <main class="container">
+        <h2>Formulario de Nueva Venta</h2>
 
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Seleccionar</th>
-                    <th>Producto</th>
-                    <th>Precio</th>
-                    <th>Cantidad</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for p in productos %}
-                <tr>
-                    <td><input type="checkbox" name="producto_id" value="{{ p.id }}"></td>
-                    <td>{{ p.nombre }}</td>
-                    <td>${{ p.precio }}</td>
-                    <td><input type="number" name="cantidad" value="1" min="1"></td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <form method="POST" class="form-venta">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>Cliente:</label>
+                <input type="text" name="cliente" class="form-control" placeholder="Nombre del cliente" required>
+            </div>
 
-        <br>
-        <button type="submit">Registrar Venta</button>
-    </form>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Seleccionar</th>
+                        <th>Producto</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for p in productos %}
+                    <tr>
+                        <td><input type="checkbox" name="producto_id" value="{{ p.id }}"></td>
+                        <td>{{ p.nombre }}</td>
+                        <td>${{ p.precio }}</td>
+                        <td><input type="number" name="cantidad" value="1" min="1" class="cantidad-input"></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
 
-    {% if messages %}
-        <ul>
-        {% for message in messages %}
-            <li>{{ message }}</li>
-        {% endfor %}
-        </ul>
-    {% endif %}
+            <div class="form-actions">
+                <button type="submit" class="btn">💾 Registrar Venta</button>
+                <a href="{% url 'admin_productos' %}" class="btn-cancelar">Cancelar</a>
+            </div>
+        </form>
+
+        {% if messages %}
+            <div class="mensaje">
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </main>
+
+    <footer>
+        <p>© 2025 Sistema de Ventas - Juguetería</p>
+    </footer>
 </body>
 </html>

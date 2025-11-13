@@ -174,3 +174,43 @@ footer {
   padding: 1rem;
   margin-top: 2rem;
 }
+/* ⚙️ Sección de navegación */
+#navegacion {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+#navegacion h2 {
+  color: #ff4b6e;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* 💖 Contenedor de botones */
+.botonera {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* 🌟 Estilo base de los botones tipo <a> */
+.btn {
+  display: inline-block;
+  background: linear-gradient(90deg, #ff6f91, #ff4b6e);
+  color: white;
+  padding: 0.8rem 1.6rem;
+  border-radius: 1rem;
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(255, 105, 135, 0.3);
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background: linear-gradient(90deg, #ff4b6e, #ff1a4d);
+  transform: scale(1.07);
+  box-shadow: 0 6px 12px rgba(255, 105, 135, 0.4);
+}

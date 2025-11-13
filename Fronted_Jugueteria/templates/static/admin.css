@@ -1,25 +1,150 @@
+
 body {
-    font-family: Arial, sans-serif;
-    background: #f6f8fa;
-    margin: 20px;
+    font-family: 'Poppins', Arial, sans-serif;
+    background-color: #f9fafc;
+    margin: 0;
+    padding: 20px;
+    color: #333;
 }
+
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background: linear-gradient(90deg, #ffb6c1, #ff9aa2);
+    padding: 15px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
-h1 {
-    color: #333;
+
+header h1 {
+    color: #fff;
+    font-size: 1.8em;
+    margin: 0;
 }
+
+header .btn {
+    background: #fff;
+    color: #ff4f6f;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+header .btn:hover {
+    background: #ff4f6f;
+    color: #fff;
+}
+
+
+.container {
+    background: #ffffff;
+    margin-top: 30px;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.container h2 {
+    color: #444;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* =======================
+   Tabla de productos
+======================= */
 table {
     width: 100%;
     border-collapse: collapse;
-    background: white;
+    margin-top: 15px;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
 }
-th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
+
+th {
+    background-color: #ff7b93;
+    color: white;
+    text-align: left;
+    padding: 12px;
+    font-weight: 600;
+    font-size: 0.95em;
 }
+
+td {
+    border-bottom: 1px solid #f0f0f0;
+    padding: 10px;
+    font-size: 0.95em;
+}
+
+tr:hover {
+    background-color: #fff5f6;
+}
+
+/* =======================
+   Botones de acción
+======================= */
+.actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-edit, .btn-delete {
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 0.9em;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-edit {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+.btn-edit:hover {
+    background-color: #43a047;
+}
+
+.btn-delete {
+    background-color: #f44336;
+    color: #fff;
+}
+
+.btn-delete:hover {
+    background-color: #d32f2f;
+}
+
+
+.new-product-btn {
+    display: inline-block;
+    margin-top: 15px;
+    background-color: #ff7b93;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.new-product-btn:hover {
+    background-color: #ff4f6f;
+}
+
+
+footer {
+    text-align: center;
+    margin-top: 40px;
+    color: #777;
+    font-size: 0.9em;
+}
+
 th {
     background: #007bff;
     color: white;

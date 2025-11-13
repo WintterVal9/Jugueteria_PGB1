@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Juguetería 🎠</title>
-  
-  <!-- Enlazamos correctamente los estilos -->
-  <link rel="stylesheet" href="static/style.css" />
+  <title>🎠 Juguetería TeddyBear</title>
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="{% static 'style.css' %}" />
 
   <!-- Script principal -->
-  <script src="static/script.js" defer></script>
+  <script src="{% static 'script.js' %}" defer></script>
 </head>
 
 <body>
@@ -19,7 +19,7 @@
   </header>
 
   <main>
-    <!-- Sección de conexión -->
+    <!-- 🔹 Sección de conexión -->
     <section id="conexion">
       <h2>🔗 Estado de conexión con el servidor</h2>
       <button id="verificarBtn">Verificar conexión</button>
@@ -28,11 +28,24 @@
 
     <hr>
 
-    <!-- Sección de productos -->
+    <!-- 🔹 Sección de productos -->
     <section id="productos">
       <h2>🧸 Lista de productos</h2>
       <button id="cargarBtn">Cargar productos</button>
       <div id="listaProductos" class="grid-productos"></div>
+    </section>
+
+    <hr>
+
+    <!-- 🔹 Navegación administrativa -->
+    <section id="navegacion">
+      <h2>⚙️ Administración y gestión</h2>
+      <div class="botonera">
+        <a href="{% url 'admin_productos' %}" class="btn">Administrar productos</a>
+        <a href="{% url 'admin_crear_producto' %}" class="btn">Crear nuevo producto</a>
+        <a href="{% url 'lista_productos' %}" class="btn">Ver productos disponibles</a>
+        <a href="/api/admin/ventas/" class="btn">Registrar ventas</a>
+      </div>
     </section>
   </main>
 

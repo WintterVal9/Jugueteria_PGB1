@@ -4,10 +4,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const cargarBtn = document.getElementById("cargarBtn");
   const listaProductos = document.getElementById("listaProductos");
 
-  // Definir la URL base del backend
-  const API_BASE = "http://127.0.0.1:8000/api/";
+  // ✅ URL base corregida
+  const API_BASE = "http://127.0.0.1:8000/";
 
-  // 🧩 Verificar conexión con el backend
+  // 🔹 Verificar conexión con el backend
   verificarBtn.addEventListener("click", async () => {
     try {
       const response = await fetch(`${API_BASE}verificar-conexion/`);
@@ -23,10 +23,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // 🧸 Cargar lista de productos
+  // 🔹 Cargar lista de productos
   cargarBtn.addEventListener("click", async () => {
     try {
-      const response = await fetch(`${API_BASE}productos/`);
+      const response = await fetch(`${API_BASE}api/productos/`);
       if (!response.ok) throw new Error("Error al cargar productos");
 
       const productos = await response.json();
@@ -43,7 +43,8 @@ document.addEventListener("DOMContentLoaded", () => {
         item.innerHTML = `
           <h3>${p.nombre}</h3>
           <p>💲 Precio: $${p.precio}</p>
-          <p>🏷️ Categoría: ${p.categoria}</p>
+          <p>🏷️ Línea: ${p.linea}</p>
+          <p>📦 Stock: ${p.stock}</p>
         `;
         listaProductos.appendChild(item);
       });
