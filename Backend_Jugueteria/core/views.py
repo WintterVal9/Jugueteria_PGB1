@@ -97,4 +97,10 @@ def productos_crud(request):
 def api_productos(request):
     productos = list(Producto.objects.values())
     return JsonResponse(productos, safe=False)
+from django.shortcuts import render
+
+# 🏠 Vista del index principal
+def index(request):
+    return render(request, 'index.html')
+
 
