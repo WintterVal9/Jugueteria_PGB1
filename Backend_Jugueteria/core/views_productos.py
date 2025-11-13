@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from .models import Producto
-from .utils.mongo_storage import guardar_imagen
+from .mongo_storage import guardar_imagen
 from bson.objectid import ObjectId
 
 def lista_productos_admin(request):
