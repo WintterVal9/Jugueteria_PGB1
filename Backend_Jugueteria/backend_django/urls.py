@@ -15,9 +15,23 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path , include
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+from core import views  # 🔹 Importar vistas para el frontend
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-     path('api/', include('core.urls')),
+    path('api/', include('core.urls')),  # 🔹 Tus APIs del core
+    
+    # 🔹 FRONTEND ROUTES - URLs para las páginas HTML
+    path('', views.index, name='index'),
+    path('productos/', views.lista_productos_front, name='productos_front'),
+    path('admin/productos/', views.admin_productos_front, name='admin_productos_front'),
+    path('admin/ventas/', views.registrar_ventas_front, name='ventas_front'),
+    path('admin/productos/nuevo/', views.crear_producto_front, name='crear_producto_front'),
 ]
+
+# Archivos estáticos
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -99,8 +99,33 @@ def api_productos(request):
     return JsonResponse(productos, safe=False)
 from django.shortcuts import render
 
-# 🏠 Vista del index principal
+from django.shortcuts import render
+
+# 🏠 Vista del index principal (YA LA TIENES)
 def index(request):
     return render(request, 'index.html')
+
+# 🔹 AGREGAR ESTAS VISTAS PARA EL FRONTEND:
+
+def lista_productos_front(request):
+    """Vista para la página de lista de productos (frontend)"""
+    return render(request, 'productos_list.html')
+
+def admin_productos_front(request):
+    """Vista para la página de administración de productos (frontend)"""
+    return render(request, 'admin_products.html')
+
+def crear_producto_front(request):
+    """Vista para la página de crear producto (frontend)"""
+    return render(request, 'crear_producto.html')
+
+def registrar_ventas_front(request):
+    """Vista para la página de registrar ventas (frontend)"""
+    return render(request, 'registrar_ventas.html')
+
+# 🔹 VISTA PARA EL API PRINCIPAL (si no la tienes):
+def index_api(request):
+    """Endpoint principal del API"""
+    return JsonResponse({"mensaje": "API de Juguetería TeddyBear funcionando", "estado": "conectado"})
 
 
