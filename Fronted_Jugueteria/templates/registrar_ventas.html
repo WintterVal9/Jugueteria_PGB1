@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrar Venta</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1>Registrar Venta</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        <label>Cliente:</label>
+        <input type="text" name="cliente" required><br><br>
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Seleccionar</th>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in productos %}
+                <tr>
+                    <td><input type="checkbox" name="producto_id" value="{{ p.id }}"></td>
+                    <td>{{ p.nombre }}</td>
+                    <td>${{ p.precio }}</td>
+                    <td><input type="number" name="cantidad" value="1" min="1"></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <br>
+        <button type="submit">Registrar Venta</button>
+    </form>
+
+    {% if messages %}
+        <ul>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
