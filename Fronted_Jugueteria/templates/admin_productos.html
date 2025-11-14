@@ -12,7 +12,7 @@
   <header class="text-center mb-4">
     <h1>🎠 Juguetería TeddyBear</h1>
     <p>Módulo Administrativo - Gestión de Productos</p>
-    <a href="{% url 'index' %}" class="btn btn-secondary mt-2">🏠 Volver al Inicio</a>
+    <a href="/" class="btn btn-secondary mt-2">🏠 Volver al Inicio</a>
   </header>
 
   <main class="container bg-white p-4 rounded shadow-sm">
@@ -43,5 +43,26 @@
         <input type="text" id="linea" class="form-control">
       </div>
 
+      <div class="col-12">
+        <label class="form-label">Descripción</label>
+        <textarea id="descripcion" class="form-control" rows="3"></textarea>
+      </div>
+
       <div class="col-12 text-center mt-3">
-        <button type="button" class="btn btn-success" onclic
+        <button type="button" class="btn btn-success" onclick="guardarProducto()">💾 Guardar Producto</button>
+        <button type="button" class="btn btn-warning" onclick="limpiarFormulario()">🔄 Limpiar</button>
+      </div>
+    </form>
+
+    <hr class="my-4">
+
+    <!-- Lista de productos -->
+    <h3 class="text-center mb-3">Lista de Productos</h3>
+    <div id="listaProductosAdmin">
+      <p class="text-center">Cargando productos...</p>
+    </div>
+  </main>
+
+  <script src="{% static 'js/admin.js' %}"></script>
+</body>
+</html>

@@ -13,15 +13,15 @@
     <h1>🎠 Juguetería TeddyBear</h1>
     <p>Registrar nuevo producto</p>
     <div class="mt-2">
-      <a href="{% url 'admin_productos' %}" class="btn btn-secondary">⬅️ Volver al panel</a>
-      <a href="{% url 'index' %}" class="btn btn-outline-dark">🏠 Inicio</a>
+      <a href="/administracion/productos/" class="btn btn-secondary">⬅️ Volver al panel</a>
+      <a href="/" class="btn btn-outline-dark">🏠 Inicio</a>
     </div>
   </header>
 
   <main class="container bg-white p-4 rounded shadow-sm">
     <h3 class="text-center mb-4">🧸 Nuevo Producto</h3>
 
-    <form method="POST" enctype="multipart/form-data" class="row g-3">
+    <form method="POST" class="row g-3">
       {% csrf_token %}
 
       <div class="col-md-6">
@@ -34,4 +34,33 @@
         <input type="text" name="nombre" class="form-control" placeholder="Ej. Oso de Peluche Gigante" required>
       </div>
 
-      <d
+      <div class="col-md-4">
+        <label class="form-label">Precio:</label>
+        <input type="number" name="precio" class="form-control" step="0.01" placeholder="0.00" required>
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label">Stock:</label>
+        <input type="number" name="stock" class="form-control" placeholder="0" required>
+      </div>
+
+      <div class="col-md-4">
+        <label class="form-label">Línea:</label>
+        <input type="text" name="linea" class="form-control" placeholder="Ej. Peluches, Educativos">
+      </div>
+
+      <div class="col-12">
+        <label class="form-label">Descripción:</label>
+        <textarea name="descripcion" class="form-control" rows="3" placeholder="Descripción del producto..."></textarea>
+      </div>
+
+      <div class="col-12 text-center mt-4">
+        <button type="submit" class="btn btn-success btn-lg">💾 Guardar Producto</button>
+        <button type="reset" class="btn btn-warning btn-lg">🔄 Limpiar</button>
+      </div>
+    </form>
+  </main>
+
+  <script src="{% static 'js/crear_producto.js' %}"></script>
+</body>
+</html>

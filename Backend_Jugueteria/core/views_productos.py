@@ -1,55 +1,44 @@
-from django.shortcuts import render, redirect
 from django.http import JsonResponse
-from django.contrib import messages
+from django.views.decorators.csrf import csrf_exempt
+from django.forms.models import model_to_dict
 from .models import Producto
-from .mongo_storage import guardar_imagen
-from bson.objectid import ObjectId
+import json
 
-# 🔹 Vista para mostrar productos en el panel administrativo
-def lista_productos_admin(request):
-    """
-    Muestra todos los productos registrados en el panel de administración.
-    """
-    productos = Producto.objects.all()
-    return render(request, 'productos_list.html', {'productos': productos})
+@csrf_exempt
+def productos_crud(request):
+    """CRUD completo de productos"""
+    if request.method == 'GET':
+        productos = list(Producto.objects.values())
+        return JsonResponse({'status': 'ok', 'data': productos})
 
-
-# 🔹 Vista para crear un nuevo producto desde formulario HTML
-def crear_producto(request):
-    """
-    Crea un nuevo producto y guarda su imagen en Mongo (si aplica).
-    """
-    if request.method == 'POST':
-        nombre = request.POST.get('nombre')
-        codigo = request.POST.get('codigo')
-        precio = request.POST.get('precio')
-        stock = request.POST.get('stock')
-        linea = request.POST.get('linea')
-        descripcion = request.POST.get('descripcion')
-        imagen = request.FILES.get('imagen')
-
-        # Crear objeto del producto
-        producto = Producto(
-            nombre=nombre,
-            codigo=codigo,
-            precio=precio,
-            stock=stock,
-            linea=linea,
-            descripcion=descripcion
+    elif request.method == 'POST':
+        data = json.loads(request.body)
+        producto = Producto.objects.create(
+            codigo=data['codigo'],
+            nombre=data['nombre'],
+            descripcion=data.get('descripcion', ''),
+            precio=data.get('precio', 0),
+            stock=data.get('stock', 0),
+            linea=data.get('linea', '')
         )
+        return JsonResponse({'status': 'created', 'data': model_to_dict(producto)})
 
-        # Guardar imagen en MongoDB si existe
-        if imagen:
-            try:
-                file_id = guardar_imagen(imagen, imagen.name)
-                producto.linea = str(file_id)  # Guardamos ID del archivo como referencia
-            except Exception as e:
-                messages.error(request, f"⚠️ Error guardando la imagen: {e}")
-
+    elif request.method == 'PUT':
+        data = json.loads(request.body)
+        producto = Producto.objects.get(id=data['id'])
+        producto.nombre = data['nombre']
+        producto.precio = data['precio']
+        producto.stock = data['stock']
         producto.save()
-        messages.success(request, f"✅ Producto '{producto.nombre}' registrado correctamente.")
-        return redirect('admin_productos')
+        return JsonResponse({'status': 'updated', 'data': model_to_dict(producto)})
 
-    # Si es GET, solo renderiza el formulario
-    return render(request, 'crear_producto.html')
+    elif request.method == 'DELETE':
+        data = json.loads(request.body)
+        Producto.objects.filter(id=data['id']).delete()
+        return JsonResponse({'status': 'deleted'})
 
+def lista_productos_admin(request):
+    """Vista para administración de productos (si la necesitas)"""
+    productos = Producto.objects.all()
+    # Puedes retornar JSON o renderizar un template según necesites
+    return JsonResponse({'status': 'ok', 'productos': list(productos.values())})

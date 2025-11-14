@@ -18,20 +18,25 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from core import views  # 🔹 Importar vistas para el frontend
+from core import views, views_productos
+
+from django.contrib import admin
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+from core import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/', include('core.urls')),  # 🔹 Tus APIs del core
-    
-    # 🔹 FRONTEND ROUTES - URLs para las páginas HTML
+    path('admin/', admin.site.urls),  # 🔹 Admin de Django (MANTENER)
+
     path('', views.index, name='index'),
     path('productos/', views.lista_productos_front, name='productos_front'),
-    path('admin/productos/', views.admin_productos_front, name='admin_productos_front'),
-    path('admin/ventas/', views.registrar_ventas_front, name='ventas_front'),
-    path('admin/productos/nuevo/', views.crear_producto_front, name='crear_producto_front'),
+    path('administracion/productos/', views.admin_productos_front, name='admin_productos_front'),  
+    path('administracion/ventas/', views.registrar_ventas_front, name='ventas_front'),  
+    path('administracion/productos/nuevo/', views.crear_producto_front, name='crear_producto_front'),  
+    
+    path('api/', include('core.urls')),  
 ]
 
-# Archivos estáticos
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
