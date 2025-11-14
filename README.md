@@ -3,12 +3,12 @@ En el proyecto de la jugueteria contamos con 6 entregas fundamentales, ademas de
 
 → Entrega 1 (Lista)
 
-→ Entrega 2 (En correccion)
+→ Entrega 2 (Lista)
 
-→ Entrega 3 (En proceso de desarollo)
+→ Entrega 3 (Lista)
 
-→ Entrega 4 (Pendiente)
+→ Entrega 4 (Lista)
 
-→ Entrega 5 (Pendiente)
+→ Entrega 5 (En proceso de desarrollo)
 
 → Entrega 6 (Pendiente)
