@@ -88,10 +88,10 @@ USE_I18N = True
 USE_TZ = True
 
 # Archivos estáticos
-STATIC_URL = '/static/'  # 🔹 Agrega la diagonal al inicio
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, '..', 'Fronted_Jugueteria', 'static'),  # 🔹 Ruta corregida
-]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'Fronted_Jugueteria', 'static'),
+]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
