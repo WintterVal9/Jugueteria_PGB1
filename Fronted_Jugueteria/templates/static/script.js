@@ -3,6 +3,21 @@ document.addEventListener("DOMContentLoaded", () => {
   const estadoConexion = document.getElementById("estadoConexion");
   const cargarBtn = document.getElementById("cargarBtn");
   const listaProductos = document.getElementById("listaProductos");
+  document.addEventListener("click", e => {
+    const target = e.target;
+
+    // Solo aplica a botones o elementos con clase .btn
+    if (target.classList.contains("btn") || 
+        target.classList.contains("btn-edit") ||
+        target.classList.contains("btn-delete") ||
+        target.classList.contains("new-product-btn")) {
+
+        const rect = target.getBoundingClientRect();
+        target.style.setProperty('--x', e.clientX - rect.left);
+        target.style.setProperty('--y', e.clientY - rect.top);
+    }
+});
+
 
   const API_BASE = "http://127.0.0.1:8000";
 
