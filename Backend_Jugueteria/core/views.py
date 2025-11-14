@@ -63,7 +63,7 @@ def lista_productos_front(request):
 
 def admin_productos_front(request):
     """Vista para la página de administración de productos (frontend)"""
-    return render(request, 'admin_products.html')
+    return render(request, 'admin_productos.html')
 
 def crear_producto_front(request):
     """Vista para la página de crear producto (frontend)"""
