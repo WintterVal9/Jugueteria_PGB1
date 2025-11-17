@@ -6,31 +6,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>🎠 Juguetería TeddyBear</title>
 
-  <!-- 🔹 Bootstrap igual que admin_productos -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- 🔹 Tu estilo admin.css -->
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 
-<body>
+<body class="body-kawaii">
+
+  <!-- ✨ Efectos brillito -->
   <div class="sparkle" style="top: 10%; left: 15%;"></div>
   <div class="sparkle" style="top: 30%; left: 70%;"></div>
   <div class="sparkle" style="top: 50%; left: 40%;"></div>
   <div class="sparkle" style="top: 70%; left: 80%;"></div>
   <div class="sparkle" style="top: 85%; left: 20%;"></div>
 
-  <header class="text-center p-4 shadow-sm">
+  <!-- 🌸 HEADER BONITO Y LIMPIO -->
+  <header class="header-principal">
     <h1>🎠 Juguetería TeddyBear</h1>
     <p>Panel de conexión y gestión de productos</p>
   </header>
 
-  <main class="container bg-white p-4 rounded shadow-sm mt-4">
+  <main class="contenedor-kawaii">
 
     <!-- 🔹 Sección de conexión -->
-    <section id="conexion" class="text-center mb-5">
+    <section id="conexion" class="centro mb-5">
       <h2>🔗 Estado de conexión con el servidor</h2>
-      <button id="verificarBtn" class="btn btn-primary mt-2">Verificar conexión</button>
+      <button id="verificarBtn" class="boton-rosa">Verificar conexión</button>
       <p id="estadoConexion" class="mensaje mt-3">Esperando verificación...</p>
     </section>
 
@@ -38,10 +37,10 @@
 
     <!-- 🔹 Sección de productos -->
     <section id="productos" class="mt-4">
-      <h2 class="text-center">🧸 Lista de productos</h2>
+      <h2 class="centro">🧸 Lista de productos</h2>
 
-      <div class="text-center mt-3">
-        <button id="cargarBtn" class="btn btn-info">Cargar productos</button>
+      <div class="centro mt-3">
+        <button id="cargarBtn" class="boton-azul">Cargar productos</button>
       </div>
 
       <div id="listaProductos" class="grid-productos mt-4"></div>
@@ -49,7 +48,7 @@
 
     <hr>
 
-    <!-- 🔹 Navegación administrativa -->
+    <!-- 🔹 Navegación administrativa (NO TOCADA) -->
     <section id="navegacion" class="mt-4 text-center">
       <h2>⚙️ Administración y gestión</h2>
 
@@ -63,11 +62,10 @@
 
   </main>
 
-  <footer class="footer-soft text-center mt-4 p-3">
-  <p>© 2025 Juguetería PGB1 - Desarrollado por Valentina Martinez, Laura Ramirez, David Suarez 💫</p>
+  <footer class="footer-soft">
+    <p>© 2025 Juguetería PGB1 - TeddyBear Grupo 9 💫</p>
   </footer>   
 
-  
   <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>
