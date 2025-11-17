@@ -6,6 +6,9 @@ urlpatterns = [
     path('verificar-conexion/', views.verificar_conexion, name='verificar_conexion'),
     path('productos/', views.api_productos, name='api_productos'),
     
+
+
+    
 ]
 
 

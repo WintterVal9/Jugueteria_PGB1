@@ -1,3 +1,7 @@
+/* Importar fuentes bonitas */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&display=swap');
+
 /* 🎠 Estilo general */
 body {
   font-family: "Poppins", sans-serif;
@@ -6,19 +10,44 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ✨ Destellos suaves */
+.sparkle {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 50%;
+  opacity: 0.85;
+  animation: sparkleFloat 8s infinite ease-in-out;
+  pointer-events: none;
+  z-index: 3; /* SUBIDO para que sí se vean */
+}
+
+@keyframes sparkleFloat {
+  0% { transform: translateY(0) scale(0.8); opacity: 0.6; }
+  50% { transform: translateY(-40px) scale(1.2); opacity: 1; }
+  100% { transform: translateY(0) scale(0.8); opacity: 0.6; }
 }
 
 /* 🎀 Encabezado */
 header {
-  background: linear-gradient(90deg, #ffb6c1, #ff99aa);
-  color: white;
+  background: linear-gradient(90deg, #ffb6c1, #ff99aa) !important; /* Evita que Bootstrap lo cambie */
+  color: white !important;
   text-align: center;
-  padding: 2rem 0;
+  padding: 2rem 0 !important;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  position: relative;
+  z-index: 4;
 }
 
 header h1 {
-  font-size: 2.2rem;
+  font-family: 'Dancing Script', cursive;
+  text-shadow: 0 3px 6px rgba(255, 170, 180, 0.25);
+  font-size: 2.8rem;
   margin: 0;
   letter-spacing: 1px;
 }
@@ -26,7 +55,8 @@ header h1 {
 header p {
   margin: 0.5rem 0 0;
   font-weight: 300;
-  opacity: 0.9;
+  opacity: 0.95;
+  font-style: italic;
 }
 
 /* 🌸 Contenido principal */
@@ -37,46 +67,8 @@ main {
   background: white;
   border-radius: 1.5rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-/* ✨ Botones */
-button {
-  background: #ff6f91;
-  color: white;
-  border: none;
-  padding: 0.7rem 1.5rem;
-  border-radius: 1rem;
-  cursor: pointer;
-  font-weight: 600;
-  transition: all 0.3s ease;
-}
-
-button:hover {
-  background: #ff3d68;
-  transform: scale(1.05);
-}
-
-/* 🧩 Estado de conexión */
-#conexion {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.mensaje {
-  margin-top: 1rem;
-  font-weight: 500;
-}
-
-/* 🧸 Productos */
-#productos {
-  text-align: center;
-}
-
-.grid-productos {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 1.5rem;
-  margin-top: 1.5rem;
+  position: relative;
+  z-index: 2;
 }
 
 /* 🎁 Tarjeta individual */
@@ -99,11 +91,7 @@ button:hover {
   color: #ff4b6e;
   margin-bottom: 0.5rem;
   font-size: 1.2rem;
-}
-
-.producto p {
-  margin: 0.3rem 0;
-  font-size: 0.95rem;
+  font-family: 'Dancing Script', cursive;
 }
 
 /* 💫 Línea divisoria */
@@ -113,81 +101,36 @@ hr {
   margin: 2rem 0;
 }
 
-/* 🎠 Footer */
-footer {
+/* 🎠 Footer rosita — CORREGIDO */
+.footer-soft {
   text-align: center;
   padding: 1rem 0;
   background: #ffb6c1;
   color: white;
-  font-size: 0.9rem;
+  font-size: 1rem;
   margin-top: 2rem;
   box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.1);
+  font-family: 'Dancing Script', cursive;
+  letter-spacing: 1px;
+  border-radius: 12px;
+  position: relative;
+  z-index: 2;
 }
 
-footer p {
+.footer-soft p {
   margin: 0;
 }
 
-section {
-  margin-bottom: 2rem;
-}
-
-button {
-  background: #ff6f61;
-  color: white;
-  border: none;
-  padding: 0.7rem 1.2rem;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 1rem;
-}
-
-button:hover {
-  background: #ff3b2e;
-}
-
-.mensaje {
-  margin-top: 0.5rem;
-  font-weight: 600;
-}
-
-.grid-productos {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.producto {
-  background: white;
-  border: 1px solid #eee;
-  border-radius: 10px;
-  padding: 1rem;
-  text-align: center;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
-
-footer {
-  text-align: center;
-  background: #222;
-  color: white;
-  padding: 1rem;
-  margin-top: 2rem;
-}
 /* ⚙️ Sección de navegación */
-#navegacion {
-  text-align: center;
-  margin-top: 3rem;
-}
-
 #navegacion h2 {
   color: #ff4b6e;
   margin-bottom: 1rem;
   font-size: 1.5rem;
   font-weight: 600;
+  font-family: 'Dancing Script', cursive;
 }
 
-/* 💖 Contenedor de botones */
+/* Dejas tu botonera exacta */
 .botonera {
   display: flex;
   justify-content: center;
@@ -196,9 +139,8 @@ footer {
   margin-top: 1rem;
 }
 
-/* 🌟 Estilo base de los botones tipo <a> */
+/* Botones <a> */
 .btn {
-  display: inline-block;
   background: linear-gradient(90deg, #ff6f91, #ff4b6e);
   color: white;
   padding: 0.8rem 1.6rem;

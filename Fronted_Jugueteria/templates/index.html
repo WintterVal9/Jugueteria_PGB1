@@ -6,52 +6,68 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>🎠 Juguetería TeddyBear</title>
 
-  <!-- 🔹 CSS desde carpeta static -->
+  <!-- 🔹 Bootstrap igual que admin_productos -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- 🔹 Tu estilo admin.css -->
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 
 <body>
-  <header>
+  <div class="sparkle" style="top: 10%; left: 15%;"></div>
+  <div class="sparkle" style="top: 30%; left: 70%;"></div>
+  <div class="sparkle" style="top: 50%; left: 40%;"></div>
+  <div class="sparkle" style="top: 70%; left: 80%;"></div>
+  <div class="sparkle" style="top: 85%; left: 20%;"></div>
+
+  <header class="text-center p-4 shadow-sm">
     <h1>🎠 Juguetería TeddyBear</h1>
     <p>Panel de conexión y gestión de productos</p>
   </header>
 
-  <main>
+  <main class="container bg-white p-4 rounded shadow-sm mt-4">
+
     <!-- 🔹 Sección de conexión -->
-    <section id="conexion">
+    <section id="conexion" class="text-center mb-5">
       <h2>🔗 Estado de conexión con el servidor</h2>
-      <button id="verificarBtn">Verificar conexión</button>
-      <p id="estadoConexion" class="mensaje">Esperando verificación...</p>
+      <button id="verificarBtn" class="btn btn-primary mt-2">Verificar conexión</button>
+      <p id="estadoConexion" class="mensaje mt-3">Esperando verificación...</p>
     </section>
 
     <hr>
 
     <!-- 🔹 Sección de productos -->
-    <section id="productos">
-      <h2>🧸 Lista de productos</h2>
-      <button id="cargarBtn">Cargar productos</button>
-      <div id="listaProductos" class="grid-productos"></div>
+    <section id="productos" class="mt-4">
+      <h2 class="text-center">🧸 Lista de productos</h2>
+
+      <div class="text-center mt-3">
+        <button id="cargarBtn" class="btn btn-info">Cargar productos</button>
+      </div>
+
+      <div id="listaProductos" class="grid-productos mt-4"></div>
     </section>
 
     <hr>
 
     <!-- 🔹 Navegación administrativa -->
-    <section id="navegacion">
+    <section id="navegacion" class="mt-4 text-center">
       <h2>⚙️ Administración y gestión</h2>
-      <div class="botonera">
+
+      <div class="botonera mt-3">
         <a href="/administracion/productos/" class="btn">Administrar productos</a>
         <a href="/administracion/productos/nuevo/" class="btn">Crear nuevo producto</a>
         <a href="/productos/" class="btn">Ver productos disponibles</a>
-        <a href="/administracion/ventas/" class="btn">Registrar ventas</a>  
+        <a href="/administracion/ventas/" class="btn">Registrar ventas</a>
       </div>
     </section>
+
   </main>
 
- <footer>
-    <p>© 2025 Juguetería PGB1 - Desarrollado por Valentina Martinez, Laura Ramirez, David Suarez 💫</p>
-  </footer>
+  <footer class="footer-soft text-center mt-4 p-3">
+  <p>© 2025 Juguetería PGB1 - Desarrollado por Valentina Martinez, Laura Ramirez, David Suarez 💫</p>
+  </footer>   
 
-  <!-- Script principal -->
+  
   <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>
