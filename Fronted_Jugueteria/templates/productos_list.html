@@ -10,6 +10,67 @@
 
     <!-- 🔹 Tu CSS principal -->
     <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+    
+    <style>
+        /* 🔥 ESTILOS PARA LAS TARJETAS BONITAS */
+        .contenedor-tarjetas {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .tarjeta-producto {
+            background: linear-gradient(135deg, #ffe6f0 0%, #ffd1e0 100%);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 6px 15px rgba(255,182,193,0.3);
+            border: 2px solid rgba(255,182,193,0.5);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tarjeta-producto:hover {
+            transform: translateY(-7px) scale(1.02);
+            background: linear-gradient(135deg, #ffd1e0 0%, #ffb6c1 100%);
+            box-shadow: 0 12px 25px rgba(255,105,135,0.5);
+        }
+        
+        .tarjeta-producto h4 {
+            font-family: 'Dancing Script', cursive;
+            color: #ff4b6e;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            border-bottom: 2px dashed #ffb6c1;
+            padding-bottom: 0.5rem;
+        }
+        
+        .tarjeta-producto p {
+            margin: 0.5rem 0;
+            font-size: 0.95rem;
+            color: #333;
+            line-height: 1.4;
+        }
+        
+        .tarjeta-producto strong {
+            color: #ff4b6e;
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+    </style>
 </head>
 <body class="bg-light">
 
@@ -23,6 +84,11 @@
 
     <div class="container bg-white p-4 rounded shadow-sm">
         <h2 class="text-center mb-4">Listado de Productos Registrados</h2>
+
+        <!-- 🔥 CONTENEDOR PARA TARJETAS BONITAS -->
+        <div id="contenedorTarjetas" class="contenedor-tarjetas">
+            <!-- Las tarjetas se cargarán aquí automáticamente -->
+        </div>
 
         {% if productos %}
         <table class="table table-bordered table-hover">
@@ -59,6 +125,57 @@
     <footer class="text-center mt-4 p-3 bg-white shadow-sm">
         <p>© 2025 Sistema de Gestión - Juguetería TeddyBear</p>
     </footer>
+
+    <!-- 🔥 SCRIPT PARA CARGAR TARJETAS AUTOMÁTICAMENTE -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            console.log("🎯 Iniciando carga de tarjetas bonitas...");
+            
+            const contenedor = document.getElementById('contenedorTarjetas');
+            
+            // Cargar productos desde la API
+            fetch('http://127.0.0.1:8000/api/productos/')
+                .then(response => {
+                    if (!response.ok) throw new Error('Error al cargar productos');
+                    return response.json();
+                })
+                .then(productos => {
+                    console.log("📦 Productos cargados:", productos);
+                    
+                    if (!productos.length) {
+                        contenedor.innerHTML = '<p class="text-center text-muted">No hay productos registrados.</p>';
+                        return;
+                    }
+                    
+                    // Crear tarjetas bonitas
+                    productos.forEach((producto, index) => {
+                        const tarjeta = document.createElement('div');
+                        tarjeta.className = 'tarjeta-producto fade-in';
+                        tarjeta.style.animationDelay = `${index * 0.1}s`;
+                        
+                        tarjeta.innerHTML = `
+                            <h4>${producto.nombre}</h4>
+                            <p><strong>Precio:</strong> $${producto.precio}</p>
+                            <p><strong>Código:</strong> ${producto.codigo}</p>
+                            <p><strong>Stock:</strong> ${producto.stock}</p>
+                            ${producto.descripcion ? `<p><strong>Descripción:</strong> ${producto.descripcion}</p>` : ''}
+                            ${producto.linea ? `<p><strong>Línea:</strong> ${producto.linea}</p>` : ''}
+                        `;
+                        
+                        contenedor.appendChild(tarjeta);
+                    });
+                })
+                .catch(error => {
+                    console.error("❌ Error:", error);
+                    contenedor.innerHTML = `
+                        <div class="alert alert-danger text-center">
+                            <p>❌ Error al cargar productos</p>
+                            <small>${error.message}</small>
+                        </div>
+                    `;
+                });
+        });
+    </script>
 
 </body>
 </html>

@@ -16,53 +16,107 @@
   </header>
 
   <main class="container bg-white p-4 rounded shadow-sm">
-    <!-- Formulario de producto -->
     <h3 class="text-center mb-3">Agregar o Editar Producto</h3>
     <form id="productoForm" class="row g-3">
       <input type="hidden" id="id">
-
-      <div class="col-md-6">
-        <label class="form-label">Código</label>
-        <input type="text" id="codigo" class="form-control" required>
-      </div>
-      <div class="col-md-6">
-        <label class="form-label">Nombre</label>
-        <input type="text" id="nombre" class="form-control" required>
-      </div>
-
-      <div class="col-md-4">
-        <label class="form-label">Precio</label>
-        <input type="number" id="precio" class="form-control" required>
-      </div>
-      <div class="col-md-4">
-        <label class="form-label">Stock</label>
-        <input type="number" id="stock" class="form-control" required>
-      </div>
-      <div class="col-md-4">
-        <label class="form-label">Línea</label>
-        <input type="text" id="linea" class="form-control">
-      </div>
-
-      <div class="col-12">
-        <label class="form-label">Descripción</label>
-        <textarea id="descripcion" class="form-control" rows="3"></textarea>
-      </div>
-
+      <div class="col-md-6"><label class="form-label">Código</label><input type="text" id="codigo" class="form-control" required></div>
+      <div class="col-md-6"><label class="form-label">Nombre</label><input type="text" id="nombre" class="form-control" required></div>
+      <div class="col-md-4"><label class="form-label">Precio</label><input type="number" id="precio" class="form-control" step="0.01" required></div>
+      <div class="col-md-4"><label class="form-label">Stock</label><input type="number" id="stock" class="form-control" required></div>
+      <div class="col-md-4"><label class="form-label">Línea</label><input type="text" id="linea" class="form-control"></div>
+      <div class="col-12"><label class="form-label">Descripción</label><textarea id="descripcion" class="form-control" rows="3"></textarea></div>
       <div class="col-12 text-center mt-3">
         <button type="button" class="btn btn-success" onclick="guardarProducto()">💾 Guardar Producto</button>
-        <button type="button" class="btn btn-warning" onclick="limpiarFormulario()">🔄 Limpiar</button>
+        <button type="button" class="btn btn-warning" onclick="document.getElementById('productoForm').reset()">🔄 Limpiar</button>
       </div>
     </form>
 
     <hr class="my-4">
 
-    <!-- Lista de productos -->
     <h3 class="text-center mb-3">Lista de Productos</h3>
-    <div id="listaProductosAdmin">
-      <p class="text-center">Cargando productos...</p>
-    </div>
+    <div id="listaProductosAdmin"><p class="text-center">Cargando productos...</p></div>
   </main>
 
-  <script src="{% static 'js/admin.js' %}"></script>
+  <script>
+    const API_BASE = "http://127.0.0.1:8000";
+
+    async function guardarProducto() {
+      try {
+        const producto = {
+          codigo: document.getElementById('codigo').value.trim(),
+          nombre: document.getElementById('nombre').value.trim(),
+          precio: document.getElementById('precio').value,
+          stock: document.getElementById('stock').value,
+          linea: document.getElementById('linea').value.trim(),
+          descripcion: document.getElementById('descripcion').value.trim()
+        };
+
+        if (!producto.codigo || !producto.nombre || !producto.precio || !producto.stock) {
+          alert('⚠️ Completa Código, Nombre, Precio y Stock');
+          return;
+        }
+
+        const response = await fetch(`${API_BASE}/api/productos/`, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(producto)
+        });
+
+        const resultado = await response.json();
+        if (!response.ok) throw new Error(resultado.error || `Error ${response.status}`);
+
+        document.getElementById('productoForm').reset();
+        cargarProductosAdmin();
+        alert('✅ Producto guardado correctamente');
+
+      } catch (error) {
+        alert('❌ Error: ' + error.message);
+      }
+    }
+
+    async function cargarProductosAdmin() {
+      try {
+        const contenedor = document.getElementById('listaProductosAdmin');
+        const response = await fetch(`${API_BASE}/api/productos/`);
+        const productos = await response.json();
+
+        if (!productos.length) {
+          contenedor.innerHTML = '<div class="alert alert-info text-center"><p>📝 No hay productos registrados</p></div>';
+          return;
+        }
+
+        contenedor.innerHTML = `
+          <div class="table-responsive">
+            <table class="table table-hover table-striped">
+              <thead class="table-dark">
+                <tr><th>Código</th><th>Nombre</th><th>Precio</th><th>Stock</th><th>Línea</th><th>Descripción</th></tr>
+              </thead>
+              <tbody>
+                ${productos.map(p => `
+                  <tr>
+                    <td><strong>${p.codigo}</strong></td>
+                    <td>${p.nombre}</td>
+                    <td>$${p.precio}</td>
+                    <td><span class="badge ${p.stock > 0 ? 'bg-success' : 'bg-danger'}">${p.stock}</span></td>
+                    <td>${p.linea || '—'}</td>
+                    <td>${p.descripcion || '—'}</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+          <div class="text-center mt-3"><small class="text-muted">Mostrando ${productos.length} producto(s)</small></div>
+        `;
+
+      } catch (error) {
+        document.getElementById('listaProductosAdmin').innerHTML = `
+          <div class="alert alert-danger text-center"><p>❌ Error al cargar productos</p></div>
+        `;
+      }
+    }
+
+    // Cargar productos al iniciar
+    document.addEventListener('DOMContentLoaded', cargarProductosAdmin);
+  </script>
 </body>
 </html>

@@ -31,6 +31,13 @@
 
   <main class="container bg-white p-4 rounded shadow-sm">
     <h3 class="text-center mb-4">🧸 Nuevo Producto</h3>
+    
+    {% if error %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      ❌ {{ error }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    {% endif %}
 
     <form method="POST" class="row g-3">
       {% csrf_token %}
@@ -72,6 +79,6 @@
     </form>
   </main>
 
-  <script src="{% static 'js/crear_producto.js' %}"></script>
+  <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>
