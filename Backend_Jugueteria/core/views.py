@@ -18,6 +18,7 @@ def api_root(request):
         'endpoints_disponibles': {
             'verificar_conexion': '/api/verificar-conexion/',
             'productos': '/api/productos/',
+            'clientes': '/api/clientes/'
         }
     })
 
@@ -72,3 +73,17 @@ def crear_producto_front(request):
 def registrar_ventas_front(request):
     """Vista para la página de registrar ventas"""
     return render(request, 'registrar_ventas.html')
+
+def api_clientes(request):
+    """Endpoint para obtener clientes (para el formulario de ventas)"""
+    try:
+        from .models import Cliente
+        clientes = list(Cliente.objects.values(
+            'id', 'codigo', 'nombre', 'email', 'telefono', 'direccion', 'fecha_registro'
+        ))
+        return JsonResponse(clientes, safe=False)
+    except Exception as e:
+        return JsonResponse({
+            'error': f'Error al obtener clientes: {str(e)}',
+            'clientes': []
+        }, status=500)

@@ -50,3 +50,31 @@ class LineaProducto(models.Model):
 
     def __str__(self):
         return self.nombre
+
+class Cliente(models.Model):
+    codigo = models.CharField(max_length=50, unique=True, blank=True, null=True)
+    nombre = models.CharField(max_length=200)
+    email = models.EmailField(blank=True, null=True)
+    telefono = models.CharField(max_length=20, blank=True, null=True)
+    direccion = models.TextField(blank=True, null=True)
+    fecha_registro = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'core_cliente'
+        ordering = ['nombre']
+
+    def __str__(self):
+        if self.codigo:
+            return f"{self.codigo} - {self.nombre}"
+        return self.nombre
+
+    def save(self, *args, **kwargs):
+        if not self.codigo:
+            # Generar código automático si no se proporciona
+            last_cliente = Cliente.objects.order_by('-id').first()
+            if last_cliente:
+                last_id = last_cliente.id
+            else:
+                last_id = 0
+            self.codigo = f"CLI{last_id + 1:03d}"
+        super().save(*args, **kwargs)
